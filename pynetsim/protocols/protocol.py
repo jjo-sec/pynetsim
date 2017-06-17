@@ -21,7 +21,6 @@ class BotWhisperer(object):
         self.config = config
         self.socket = socket
         self.addr = addr
-        log.debug(addr)
         self.payload = payload
         self.recv_size = config.get("main").get("default_recv_size", 8192)
         self.set_proto_var("ADDR", addr[0])
@@ -66,7 +65,6 @@ class BotWhisperer(object):
         for protocol in cls.get_known_protocols(config):
             log.debug("Checking for {}".format(protocol))
             protocol_class = core.find_protocol_class(protocol)
-            log.debug(protocol_class)
             new_protocol = protocol_class.guess_protocol_from_payload(payload, config, addr)
             if new_protocol != identified_protocol:
                 identified_protocol = new_protocol
